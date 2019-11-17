@@ -1,4 +1,5 @@
 const express = require('express');
+var port = process.env.PORT || 3000;
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
@@ -75,6 +76,6 @@ function update(){
 
 setInterval(update, 1000/20);
 
-http.listen(80, function(){
-    console.log('listening on *:80');
+http.listen(port, function(){
+    console.log('listening');
 });
