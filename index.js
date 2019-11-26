@@ -74,7 +74,7 @@ function update(){
     projectiles = {};
 }
 
-setInterval(update, 1000/20);
+setInterval(update, 1000/60);
 
 http.listen(port, function(){
     console.log('listening');

@@ -71,7 +71,7 @@ function glideFrame(){
 
 let projectiles = {};
 
-function updateCanvas(){
+updateCanvas = function(){
     glideFrame();
 
     context.clearRect(0, 0, canvas.width, canvas.height);
