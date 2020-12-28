@@ -145,7 +145,18 @@ function updateMouse(){
     context.arc(playerX, playerY, 6, 0, 2 * Math.PI);
     context.stroke();
 
+    context.beginPath();
+    context.moveTo(playerX, playerY);
+
+    const vx = Math.cos(testAngle);
+    const vy = Math.sin(testAngle);
     
+    context.lineTo(playerX + (vx*100), playerY);
+    context.lineTo(playerX + (vx*100), playerY + (vy*100));
+    context.lineTo(playerX, playerY);
+
+
+    context.stroke();
 }
 
 class Projectile{
@@ -164,8 +175,9 @@ class Projectile{
         this.radius = 12;
         this.own = own;
         this.angle = getAngle(playerX, playerY, canvas.width/2, canvas.height/2);
-        this.vx = -(Math.abs(getAngle(playerX, playerY, canvas.width/2, canvas.height/2)) / Math.PI - 0.5) * 40.0;
-        this.vy = -(Math.abs(getAngle(playerY, playerX, canvas.height/2, canvas.width/2)) / Math.PI - 0.5) * 40.0;
+        this.vx = Math.cos(this.angle) * 20.0;
+        this.vy = Math.sin(this.angle) * 20.0;
+
         this.render = () => {
             context.strokeStyle = own ? '#FFF' : '#F55';
             context.lineWidth = this.width;
@@ -237,7 +249,7 @@ function create_UUID(){
 
 let lastProjectile = 0;
 function fire(){
-    if(new Date().getTime() - lastProjectile > 150 && !isDead){
+    if(new Date().getTime() - lastProjectile > 100 && !isDead){
         shootSounds[shootSoundIteration % 3].play();
         shootSoundIteration++;
         let newProjectile = new Projectile(true);
